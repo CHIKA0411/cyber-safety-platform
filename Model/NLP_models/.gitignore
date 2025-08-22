@@ -1,0 +1,38 @@
+Byte-compiled / optimized / DLL files
+pycache/
+*.py[cod]
+*$py.class
+
+Virtual environment
+myenv/
+venv/
+myenvn/
+.env
+
+Data files
+data/
+*.csv
+*.xlsx
+
+Artifacts / Models
+artifacts/
+*.pkl
+*.h5
+*.model
+*.joblib
+*.zip
+!scam_detector_model.zip
+
+Jupyter Notebooks checkpoints
+.ipynb_checkpoints
+
+IDE settings
+.vscode/
+.idea/
+
+Logs
+*.log
+
+Operating system files
+.DS_Store
+Thumbs.db
