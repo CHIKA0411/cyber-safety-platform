@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Chatbot</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Marked.js for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117;
+        }
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1rem;
+            min-height: 80vh;
+            max-width: 900px;
+            margin: auto;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            background-color: #161b22;
+        }
+        .message-bubble {
+            padding: 0.75rem 1rem;
+            border-radius: 1.5rem;
+            margin-bottom: 1rem;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        .user-message {
+            background-color: #0c4a6e;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 0.25rem;
+        }
+        .bot-message {
+            background-color: #21262d;
+            color: #c9d1d9;
+            align-self: flex-start;
+            border-bottom-left-radius: 0.25rem;
+        }
+        .loading-dots span {
+            animation: blink 1.4s infinite;
+            animation-fill-mode: both;
+        }
+        .loading-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .loading-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        @keyframes blink {
+            0% { opacity: 0.2; }
+            20% { opacity: 1; }
+            100% { opacity: 0.2; }
+        }
+        input:focus {
+            outline: none;
+            border-color: #3182ce;
+            box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.5);
+        }
+        /* Custom styles for rendered Markdown */
+        .bot-message h1, .bot-message h2, .bot-message h3 {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .bot-message p {
+            margin-bottom: 0.75rem;
+        }
+        .bot-message ul, .bot-message ol {
+            margin-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            list-style-type: disc;
+        }
+        .bot-message pre {
+            background-color: #0d1117;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            color: #c9d1d9;
+        }
+        .bot-message code {
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex items-center justify-center p-4">
+    <div class="chat-container">
+        <!-- Chat History -->
+        <div id="chatHistory" class="flex-grow overflow-y-auto mb-4 p-4 space-y-4">
+            <!-- Initial bot message -->
+            <div class="message-bubble bot-message self-start">
+                Hello! I am a cybersecurity chatbot. Ask me anything you want to know about cybersecurity topics.
+            </div>
+        </div>
+
+        <!-- User Input -->
+        <div class="flex items-center space-x-2 p-2 bg-gray-800 rounded-lg shadow-inner">
+            <input type="text" id="userInput" placeholder="Ask a question..."
+                class="flex-grow p-3 rounded-xl bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
+                onkeypress="handleKeyPress(event)">
+            <button id="sendButton" onclick="sendMessage()"
+                class="px-5 py-3 rounded-xl bg-blue-600 text-white font-semibold shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-200 transform hover:scale-105">
+                Send
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // API key for Gemini API (provided by the environment at runtime)
+        const apiKey = "AIzaSyAKzo7iQPbxyy4HYVALGUCunL4T1lBo9wg";
+        const apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=" + apiKey;
+
+        // Get DOM elements
+        const chatHistory = document.getElementById('chatHistory');
+        const userInput = document.getElementById('userInput');
+        const sendButton = document.getElementById('sendButton');
+
+        // Handles the Enter key press in the input field
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        // Handles sending the message
+        async function sendMessage() {
+            const userMessage = userInput.value.trim();
+            if (userMessage === '') return; // Don't send empty messages
+
+            // Disable input and button while processing
+            userInput.disabled = true;
+            sendButton.disabled = true;
+
+            // Display user message
+            addMessage(userMessage, 'user');
+            userInput.value = ''; // Clear input field
+
+            // Show loading indicator
+            const loadingBubble = addMessage('...', 'bot');
+            const loadingDots = document.createElement('div');
+            loadingDots.className = 'loading-dots text-gray-400';
+            loadingDots.innerHTML = '<span>.</span><span>.</span><span>.</span>';
+            loadingBubble.textContent = '';
+            loadingBubble.appendChild(loadingDots);
+
+            // Call the Gemini API
+            try {
+                const response = await callGeminiAPI(userMessage);
+                const botReply = marked.parse(response);
+                
+                // Remove loading indicator and display bot reply
+                loadingBubble.innerHTML = botReply;
+                
+            } catch (error) {
+                console.error("Error calling Gemini API:", error);
+                loadingBubble.textContent = 'Oops! Something went wrong. Please try again later.';
+            } finally {
+                // Re-enable input and button
+                userInput.disabled = false;
+                sendButton.disabled = false;
+                userInput.focus(); // Focus on the input field for the next message
+                // Scroll to the bottom of the chat
+                chatHistory.scrollTop = chatHistory.scrollHeight;
+            }
+        }
+
+        // Function to call the Gemini API
+        async function callGeminiAPI(prompt) {
+            const chatHistory = [];
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+            const payload = { contents: chatHistory };
+            
+            // Implement exponential backoff for API calls
+            const maxRetries = 5;
+            let currentRetry = 0;
+            while (currentRetry < maxRetries) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        if (result.candidates && result.candidates.length > 0 &&
+                            result.candidates[0].content && result.candidates[0].content.parts &&
+                            result.candidates[0].content.parts.length > 0) {
+                            return result.candidates[0].content.parts[0].text;
+                        } else {
+                            throw new Error('Unexpected API response structure.');
+                        }
+                    } else {
+                        const errorData = await response.json();
+                        if (response.status === 429) { // Too Many Requests
+                            const delay = Math.pow(2, currentRetry) * 1000;
+                            console.log(`Rate limit exceeded. Retrying in ${delay / 1000} seconds...`);
+                            await new Promise(resolve => setTimeout(resolve, delay));
+                            currentRetry++;
+                        } else {
+                            throw new Error(`API returned status code ${response.status}: ${JSON.stringify(errorData)}`);
+                        }
+                    }
+                } catch (error) {
+                    // Check if it's a network error or other fetch-related issue
+                    if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                        const delay = Math.pow(2, currentRetry) * 1000;
+                        console.log(`Network error. Retrying in ${delay / 1000} seconds...`);
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        currentRetry++;
+                    } else {
+                        throw error;
+                    }
+                }
+            }
+            throw new Error('Max retries exceeded.');
+        }
+
+        // Helper function to add a message bubble to the chat
+        function addMessage(text, sender) {
+            const messageBubble = document.createElement('div');
+            messageBubble.className = 'message-bubble ' + (sender === 'user' ? 'user-message self-end' : 'bot-message self-start');
+            messageBubble.textContent = text;
+            chatHistory.appendChild(messageBubble);
+            // Scroll to the bottom of the chat history
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+            return messageBubble; // Return the bubble element for potential updates
+        }
+    </script>
+</body>
+</html>
