@@ -82,14 +82,23 @@ const Navbar = () => {
         </div>
 
         {/* Conditional Login/Signup or Logout Buttons */}
-        <div className="hidden md:flex space-x-4">
+       <div className="hidden md:flex space-x-4">
           {isLoggedIn ? (
-            <button
-              onClick={handleLogout}
-              className={`font-bold py-2 px-6 rounded-full transition-colors duration-300 transform hover:scale-105 text-white ${logoutBtnColor}`}
-            >
-              Logout
-            </button>
+            <>
+              
+              <Link
+                to={dashboardPath}
+                className={`font-semibold py-2 px-4 rounded-full transition-colors duration-200 ${textColorClass} ${hoverTextColorClass}`}
+              >
+                My Dashboard
+              </Link>
+              <button
+                onClick={handleLogout}
+                className={`font-bold py-2 px-6 rounded-full transition-colors duration-300 transform hover:scale-105 text-white ${logoutBtnColor}`}
+              >
+                Logout
+              </button>
+            </>
           ) : (
             <>
               <Link
