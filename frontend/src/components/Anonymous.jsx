@@ -345,7 +345,7 @@ const StoryDetail = ({ story, onBack, onUpvoteStory }) => {
             </h3>
             <div className="space-y-4">
               <textarea
-                className="w-full p-4 border border-gray-200 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                className="w-full p-4 border text-black border-gray-200 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 placeholder="Share your thoughts (minimum 5 characters)..."
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
@@ -676,7 +676,7 @@ function Anonymous() {
                     Your story (minimum 30 characters)
                   </label>
                   <textarea
-                    className="w-full p-4 border border-gray-200 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    className="w-full p-4 border border-gray-200 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-black"
                     placeholder="Share your experience anonymously to help others stay safe from similar scams..."
                     value={newStory}
                     onChange={(e) => setNewStory(e.target.value)}
