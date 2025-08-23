@@ -13,27 +13,31 @@
 ---
 
 ## 📌 Overview
-**CyberShield** is a community-driven cybersecurity platform that offers:
-- Scam detection using ML models
-- Educational resources for safe internet practices
-- Real-time alerts
-- Anonymous scam reporting
-- A reputation-based feedback system
-- Chatbot assistance for cyber queries
 
-Tailored for all demographics across India — senior citizens, students, homemakers, professionals, and rural users — CyberShield empowers every citizen to take control of their digital safety.
+**CyberShield** is a community-driven cybersecurity platform that offers:
+
+- ✅ Scam detection using ML models  
+- 📚 Educational resources for safe internet practices  
+- 🚨 Real-time scam alerts  
+- 🕵️ Anonymous scam reporting  
+- ⭐ Reputation-based feedback system  
+- 🤖 Chatbot assistance for cyber queries  
+
+Tailored for all demographics across India — including senior citizens, students, homemakers, professionals, and rural users — CyberShield empowers every citizen to take control of their digital safety.
 
 ---
 
 ## ✨ Key Features
 
-- 🧠 **AI-Powered Scam Detector** – Detect fraudulent messages and links in real-time  
-- 🗣️ **ChatBot Assistance** – Instantly answer queries related to cyber threats  
-- 📰 **CyberShield Feed** – Latest news and scam alerts across regions  
-- 👥 **Community Reputation System** – Crowd-sourced scam reporting with public verification  
-- 🧪 **Interactive Learning Modules** – Quizzes, short videos, and localized content  
-- 🔐 **User Authentication** – Secure login/signup  
-- 🕵️ **Anonymous Reporting** – Submit reports without identity exposure  
+| Feature | Description |
+|--------|-------------|
+| 🧠 **AI-Powered Scam Detector** | Detect fraudulent messages and links in real-time |
+| 🗣️ **ChatBot Assistance** | Instantly answers queries related to cyber threats |
+| 📰 **CyberShield Feed** | Latest news and scam alerts across regions |
+| 👥 **Community Reputation System** | Crowd-sourced scam reporting with public verification |
+| 🧪 **Interactive Learning Modules** | Quizzes, short videos, and regional content |
+| 🔐 **User Authentication** | Secure login and signup |
+| 🕵️ **Anonymous Reporting** | Submit scam reports without revealing identity |
 
 ---
 
@@ -41,44 +45,64 @@ Tailored for all demographics across India — senior citizens, students, homema
 
 | User Segment        | Benefits                                                                 |
 |---------------------|--------------------------------------------------------------------------|
-| 👴 Senior Citizens   | Voice-friendly, jargon-free alerts and scam detection guides             |
-| 🎓 Students          | Cyber awareness through interactive learning                             |
-| 🏡 Homemakers        | Real-world tips on avoiding online fraud in shopping and payments         |
-| 💼 Professionals     | Data security insights, phishing detection for workplace safety           |
-| 🧑‍🌾 Rural Users      | Low-bandwidth support, regional language content for mobile/banking frauds |
+| 👴 **Senior Citizens**   | Voice-friendly, jargon-free alerts and scam detection guides             |
+| 🎓 **Students**          | Cyber awareness through interactive learning                             |
+| 🏡 **Homemakers**        | Real-world tips on avoiding online fraud in shopping and payments         |
+| 💼 **Professionals**     | Data security insights, phishing detection for workplace safety           |
+| 🧑‍🌾 **Rural Users**      | Low-bandwidth support, regional language content for mobile/banking frauds |
 
 ---
+
 ## ⚙️ Architecture and Workflow
-The project is structured with a modular design, separating the frontend, backend API, and machine learning models into distinct, manageable components. The following diagrams illustrate the key workflows.
-## Frontend
-<img width="1166" height="618" alt="Screenshot 2025-08-23 151356" src="https://github.com/user-attachments/assets/ddccc92a-79a3-43bb-a547-962bbdc4986d" />
 
+The platform is modular, with distinct and scalable components for frontend, backend, and machine learning. Below are the visual workflows explaining each major component.
 
-## Backend
+---
 
-<img width="1300" height="568" alt="Screenshot 2025-08-23 151406" src="https://github.com/user-attachments/assets/c0d5072f-07ec-4981-9508-5823a8ad3864" />
+### 🖥️ Frontend
 
-## Chatbot Workflow
-The core logic of the application follows a clear path from user input to final response. The process includes a crucial step for data sanitization before a response is generated.
-## Chatbot Workflow
+> Built with HTML, CSS (Tailwind), and JS, optimized for accessibility and responsiveness.
 
-<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/53ac2f81-184b-4bae-8fa1-140ee8118281" />
-## Text Detection Workflow
-This machine learning pipeline is responsible for identifying and cleaning various forms of sensitive information from the raw text input.
-## Machine learning model 1 - text detection  Workflow
+<img width="1166" height="618" alt="Frontend Architecture" src="https://github.com/user-attachments/assets/ddccc92a-79a3-43bb-a547-962bbdc4986d" />
 
-<img width="1039" height="571" alt="image" src="https://github.com/user-attachments/assets/76a2037d-0667-43fd-948b-f33c680a9e9c" />
-## Phone Detection Workflow
-A specialized, rule-based model is used for the quick and accurate detection of phone numbers, ensuring this common form of PII is handled effectively.
-## Machine learning model 2 - phone detection  Workflow
+---
 
-<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/213e7e37-68b9-4cce-bcb3-dcc0d56501d2" />
-## API to Deployment Workflow
-The backend API is designed for modern, serverless deployment. It is first developed locally and then packaged for deployment on AWS Lambda, with automatically generated API documentation.#
+### 🛠️ Backend
 
-## API generation from local to deployment
+> Node.js/Express APIs, RESTful design, connected to ML models and databases.
 
+<img width="1300" height="568" alt="Backend Architecture" src="https://github.com/user-attachments/assets/c0d5072f-07ec-4981-9508-5823a8ad3864" />
 
-<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/dca39c33-a9e3-40ac-950e-1d0079ba1c69" />
+---
 
+### 💬 Chatbot Workflow
 
+> This chatbot handles cyber queries with data sanitization before responding. Built using LLM orchestration.
+
+<img width="1536" height="1024" alt="Chatbot Workflow" src="https://github.com/user-attachments/assets/53ac2f81-184b-4bae-8fa1-140ee8118281" />
+
+---
+
+### 🧹 Text Detection Workflow
+
+> ML pipeline to detect and clean sensitive information from raw input text.
+
+<img width="1039" height="571" alt="Text Detection Workflow" src="https://github.com/user-attachments/assets/76a2037d-0667-43fd-948b-f33c680a9e9c" />
+
+---
+
+### 📱 Phone Detection Workflow
+
+> Rule-based model that detects phone numbers, a common form of PII.
+
+<img width="1536" height="1024" alt="Phone Detection Workflow" src="https://github.com/user-attachments/assets/213e7e37-68b9-4cce-bcb3-dcc0d56501d2" />
+
+---
+
+### ☁️ API to Deployment Workflow
+
+> Serverless deployment of ML-powered APIs using AWS Lambda. Includes API documentation and testing.
+
+<img width="1536" height="1024" alt="API Deployment Workflow" src="https://github.com/user-attachments/assets/dca39c33-a9e3-40ac-950e-1d0079ba1c69" />
+
+---
