@@ -1,4 +1,84 @@
-## Frontend
+# 🛡️ CyberShield – Your Shield Against Cyber Fraud
+
+[![Status](https://img.shields.io/badge/status-live-brightgreen.svg)](https://cyber-safety-platform-hibx.vercel.app/)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](#license)
+[![Made With](https://img.shields.io/badge/Made%20with-💙%20by%20Abha%20Mahato-blue)](https://abhamahato.in)
+
+> **An innovative cyber safety platform designed to protect every Indian — from students to seniors — against online threats, frauds, and scams.**
+
+---
+
+## 🌐 Live Demo
+
+**👉 [Visit CyberShield Now](https://cyber-safety-platform-hibx.vercel.app/)**
+
+---
+
+## 📌 Overview
+**CyberShield** is a community-driven cybersecurity platform that offers:
+- Scam detection using ML models
+- Educational resources for safe internet practices
+- Real-time alerts
+- Anonymous scam reporting
+- A reputation-based feedback system
+- Chatbot assistance for cyber queries
+
+Tailored for all demographics across India — senior citizens, students, homemakers, professionals, and rural users — CyberShield empowers every citizen to take control of their digital safety.
+
+---
+
+## ✨ Key Features
+
+- 🧠 **AI-Powered Scam Detector** – Detect fraudulent messages and links in real-time  
+- 🗣️ **ChatBot Assistance** – Instantly answer queries related to cyber threats  
+- 📰 **CyberShield Feed** – Latest news and scam alerts across regions  
+- 👥 **Community Reputation System** – Crowd-sourced scam reporting with public verification  
+- 🧪 **Interactive Learning Modules** – Quizzes, short videos, and localized content  
+- 🔐 **User Authentication** – Secure login/signup  
+- 🕵️ **Anonymous Reporting** – Submit reports without identity exposure  
+
+---
+
+## 🎯 Built For
+
+| User Segment        | Benefits                                                                 |
+|---------------------|--------------------------------------------------------------------------|
+| 👴 Senior Citizens   | Voice-friendly, jargon-free alerts and scam detection guides             |
+| 🎓 Students          | Cyber awareness through interactive learning                             |
+| 🏡 Homemakers        | Real-world tips on avoiding online fraud in shopping and payments         |
+| 💼 Professionals     | Data security insights, phishing detection for workplace safety           |
+| 🧑‍🌾 Rural Users      | Low-bandwidth support, regional language content for mobile/banking frauds |
+
+---
+
+🚀 Features
+Interactive Frontend: A clean, responsive web interface that provides a seamless chat experience.
+
+Privacy-First Design: Implements a critical data sanitization layer to protect user privacy.
+
+PII Detection: Utilizes specialized machine learning models and rule-based logic to accurately identify sensitive information in real-time.
+
+Scalable Backend: A robust API built with FastAPI to handle requests efficiently.
+
+Automated Documentation: Integrates Swagger UI to provide clear, interactive API documentation.
+
+Serverless Deployment: Deploys the backend as a scalable function on AWS Lambda for cost-effective and high-availability performance.
+
+⚙️ Architecture and Workflow
+The project is structured with a modular design, separating the frontend, backend API, and machine learning models into distinct, manageable components. The following diagrams illustrate the key workflows.
+
+Chatbot Workflow
+The core logic of the application follows a clear path from user input to final response. The process includes a crucial step for data sanitization before a response is generated.
+
+Text Detection Workflow
+This machine learning pipeline is responsible for identifying and cleaning various forms of sensitive information from the raw text input.
+
+Phone Detection Workflow
+A specialized, rule-based model is used for the quick and accurate detection of phone numbers, ensuring this common form of PII is handled effectively.
+
+API to Deployment Workflow
+The backend API is designed for modern, serverless deployment. It is first developed locally and then packaged for deployment on AWS Lambda, with automatically generated API documentation.#
+# Frontend
 <img width="1166" height="618" alt="Screenshot 2025-08-23 151356" src="https://github.com/user-attachments/assets/ddccc92a-79a3-43bb-a547-962bbdc4986d" />
 
 
