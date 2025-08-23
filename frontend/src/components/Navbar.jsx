@@ -87,7 +87,7 @@ const Navbar = () => {
             to="/api-tool"
             className={`font-semibold transition-colors duration-200 ${textColorClass} ${hoverTextColorClass}`}
           >
-            API-Tool
+            Scam Detector
           </Link>
         </div>
 
