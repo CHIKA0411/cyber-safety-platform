@@ -1,13 +1,11 @@
-// src/components/Navbar.jsx
 
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
-  // Get the current location object from React Router
+
   const location = useLocation();
 
-  // Determine the background color class based on the current path
   const isLoginPage = location.pathname === "/login";
   const isSignupPage = location.pathname === "/signup";
   const bgColorClass = isLoginPage || isSignupPage ? "bg-gray-900" : "bg-white";
@@ -33,12 +31,11 @@ const Navbar = () => {
       className={`${bgColorClass} shadow-sm sticky top-0 z-50 transition-colors duration-300`}
     >
       <div className="container mx-auto px-4 md:px-8 py-4 flex justify-between items-center">
-        {/* Logo or Brand Name */}
+        
         <Link to="/" className={`text-2xl font-bold ${logoColorClass}`}>
           CyberShield
         </Link>
 
-        {/* Navigation Links (Hidden on small screens) */}
         <div className="hidden md:flex space-x-8">
           <a
             href="/#testimonials"
@@ -47,18 +44,12 @@ const Navbar = () => {
             Testimonials
           </a>
 
-          {/* <Route path="/cybershield-feed" element={<CyberShieldFeed />} />
-          <Route path="/anonymous" element={<Anonymous />} />
-          <Route
-            path="/community-reputation"
-            element={<CommunityReputationPage />}
-          /> */}
 
           <a
             href="/cybershield-feed"
             className={`font-semibold transition-colors duration-200 ${textColorClass} ${hoverTextColorClass}`}
           >
-            CyberShied-Feed
+            CyberShield-Feed
           </a>
 
           <a
@@ -75,7 +66,14 @@ const Navbar = () => {
           </a>
         </div>
 
-        {/* Login and Signup Buttons */}
+        <a
+          href="/chatbot"
+          className={`font-semibold transition-colors duration-200 ${textColorClass} ${hoverTextColorClass}`}
+        >
+          ChatBot
+        </a>
+
+
         <div className="hidden md:flex space-x-4">
           <Link
             to="/login"
@@ -91,9 +89,9 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Mobile Menu Button (Hidden on large screens) */}
+
         <div className="md:hidden">
-          {/* You can add a hamburger icon here for a mobile menu */}
+
           <button className={`${textColorClass} ${hoverTextColorClass}`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"

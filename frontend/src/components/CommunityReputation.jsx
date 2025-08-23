@@ -410,7 +410,7 @@ const CommunityReputationPage = () => {
     indicator: "",
   });
 
-  // Mock data for demonstration
+
   const sampleReputations = [
     {
       indicator: "suspicious-bank-alert.com",
@@ -450,7 +450,6 @@ const CommunityReputationPage = () => {
 
   const handleReportSubmit = (reportData) => {
     console.log("Report submitted:", reportData);
-    // In real implementation, this would call the API
     alert(`Report submitted for ${reportData.indicator}`);
   };
 

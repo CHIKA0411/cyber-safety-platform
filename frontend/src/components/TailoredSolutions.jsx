@@ -1,5 +1,3 @@
-// src/components/TailoredSolutions.jsx
-
 import React from "react";
 
 const solutions = [

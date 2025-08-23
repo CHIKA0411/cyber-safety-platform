@@ -182,7 +182,7 @@ const PhishingInfographic = () => {
 
       <div className="bg-white rounded-lg shadow-lg border-2 border-dashed border-gray-300 p-6 mb-6">
         <div className="space-y-4">
-          {/* Email Header */}
+          
           <div className="border-b pb-4">
             <div className="flex justify-between items-start mb-2">
               <div className="space-y-1">
@@ -208,7 +208,7 @@ const PhishingInfographic = () => {
             </div>
           </div>
 
-          {/* Email Body */}
+
           <div className="space-y-3">
             <p className="text-sm text-gray-700">
               <span className="bg-yellow-100 px-1 rounded">Dear Employee,</span>

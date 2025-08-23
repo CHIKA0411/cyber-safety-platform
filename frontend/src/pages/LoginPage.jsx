@@ -1,5 +1,3 @@
-// src/pages/LoginPage.jsx
-
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -27,7 +25,7 @@ const LoginPage = () => {
     setErrorMessage("");
 
     try {
-      const response = await fetch("http://localhost:5000/api/login", {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -68,7 +66,7 @@ const LoginPage = () => {
         </p>
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-          {/* Email or Phone Number Input */}
+          
           <div>
             <label
               htmlFor="emailOrPhone"
@@ -87,7 +85,6 @@ const LoginPage = () => {
             />
           </div>
 
-          {/* Password Input */}
           <div>
             <div className="flex justify-between items-center">
               <label
@@ -157,14 +154,14 @@ const LoginPage = () => {
             </div>
           </div>
 
-          {/* Error Message Display */}
+
           {errorMessage && (
             <p className="text-red-500 text-sm mt-2 text-center">
               {errorMessage}
             </p>
           )}
 
-          {/* Login Button */}
+
           <div>
             <button
               type="submit"
@@ -175,7 +172,7 @@ const LoginPage = () => {
           </div>
         </form>
 
-        {/* Link to Signup */}
+
         <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
           Don't have an account?{" "}
           <Link

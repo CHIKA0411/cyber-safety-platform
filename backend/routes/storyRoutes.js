@@ -1,5 +1,3 @@
-// routes/storyRoutes.js
-
 import express from "express";
 import {
   createStory,
@@ -8,11 +6,10 @@ import {
   addComment,
   upvoteStory,
   upvoteComment,
-} from "../controllers/storyController.js";
+} from "../controller/storyController.js";
 
 const router = express.Router();
 
-// The base path /api/stories is defined in server.js
 router.post("/", createStory);
 router.get("/", getStories);
 router.get("/:id", getStory);

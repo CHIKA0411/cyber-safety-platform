@@ -1,5 +1,3 @@
-// src/components/CoreFeatures.jsx
-
 import React from "react";
 
 const features = [

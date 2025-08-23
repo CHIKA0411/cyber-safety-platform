@@ -1,11 +1,8 @@
-// controllers/authController.js
-
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
-// @desc    Register a new user
-// @route   POST /api/signup
+
 export const signup = async (req, res) => {
   try {
     const { name, gender, email, phone, demographic, password } = req.body;
@@ -37,8 +34,6 @@ export const signup = async (req, res) => {
   }
 };
 
-// @desc    Authenticate user & get token
-// @route   POST /api/login
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
