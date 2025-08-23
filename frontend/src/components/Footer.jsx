@@ -1,5 +1,3 @@
-// src/components/Footer.jsx
-
 import React from "react";
 
 const Footer = () => {
@@ -7,15 +5,15 @@ const Footer = () => {
     <footer className="bg-gray-800 text-white py-8">
       <div className="container mx-auto px-4 md:px-8 text-center">
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          {/* Logo and Copyright */}
+
           <div>
-            <span className="text-xl font-bold text-indigo-400">CyberSafe</span>
+            <span className="text-xl font-bold text-indigo-400">CyberShield</span>
             <p className="mt-1 text-sm text-gray-400">
-              &copy; 2025 CyberSafe. All rights reserved.
+              &copy; 2025 CyberShield. All rights reserved.
             </p>
           </div>
 
-          {/* Navigation Links */}
+
           <div className="flex space-x-6">
             <a href="#" className="text-sm text-gray-300 hover:text-indigo-400">
               About Us
@@ -28,14 +26,12 @@ const Footer = () => {
             </a>
           </div>
 
-          {/* Social Media Icons */}
           <div className="flex space-x-4">
             <a
               href="#"
               aria-label="Twitter"
               className="text-gray-400 hover:text-indigo-400"
             >
-              {/* Add your SVG for Twitter here */}
               <svg
                 className="h-6 w-6"
                 fill="currentColor"
@@ -50,7 +46,6 @@ const Footer = () => {
               aria-label="LinkedIn"
               className="text-gray-400 hover:text-indigo-400"
             >
-              {/* Add your SVG for LinkedIn here */}
               <svg
                 className="h-6 w-6"
                 fill="currentColor"

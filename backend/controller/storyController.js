@@ -1,4 +1,3 @@
-// controllers/storyController.js
 
 import Story from "../models/Story.js";
 import Comment from "../models/Comment.js";
@@ -8,10 +7,8 @@ import {
   sanitizeTags,
   ensureTextQuality,
   VALID_TAGS,
-} from "../utils/helpers.js";
+} from "../utils/helper.js";
 
-// @desc    Create a new story
-// @route   POST /api/stories
 export const createStory = async (req, res) => {
   try {
     const ip = req.ip || req.headers["x-forwarded-for"] || "unknown";
@@ -42,8 +39,6 @@ export const createStory = async (req, res) => {
   }
 };
 
-// @desc    Get all stories with pagination
-// @route   GET /api/stories
 export const getStories = async (req, res) => {
   try {
     const { page = 1, limit = 10, tag } = req.query;
@@ -72,8 +67,6 @@ export const getStories = async (req, res) => {
   }
 };
 
-// @desc    Get a single story and its comments
-// @route   GET /api/stories/:id
 export const getStory = async (req, res) => {
   try {
     const story = await Story.findById(req.params.id).select(
@@ -90,8 +83,6 @@ export const getStory = async (req, res) => {
   }
 };
 
-// @desc    Add a comment to a story
-// @route   POST /api/stories/:id/comments
 export const addComment = async (req, res) => {
   try {
     const ip = req.ip || req.headers["x-forwarded-for"] || "unknown";
@@ -125,8 +116,6 @@ export const addComment = async (req, res) => {
   }
 };
 
-// @desc    Upvote a story
-// @route   POST /api/stories/:id/upvote
 export const upvoteStory = async (req, res) => {
   try {
     const ip = req.ip || req.headers["x-forwarded-for"] || "unknown";
@@ -148,8 +137,7 @@ export const upvoteStory = async (req, res) => {
   }
 };
 
-// @desc    Upvote a comment
-// @route   POST /api/comments/:id/upvote
+
 export const upvoteComment = async (req, res) => {
   try {
     const ip = req.ip || req.headers["x-forwarded-for"] || "unknown";

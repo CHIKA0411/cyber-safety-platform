@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-// UI Components
 const Card = ({ children, className = "" }) => (
   <div className={`border border-gray-200 rounded-xl ${className}`}>
     {children}

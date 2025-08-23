@@ -1,5 +1,3 @@
-// src/components/FinalCta.jsx
-
 import React from "react";
 
 const FinalCta = () => {

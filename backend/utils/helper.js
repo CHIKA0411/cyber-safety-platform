@@ -3,7 +3,7 @@ const upiRegex = /\b[\w.\-]{2,256}@[a-z]{2,64}\b/gi;
 const cardRegex = /\b(?:\d[ -]*?){13,16}\b/g;
 const emailRegex = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi;
 
-function luhnCheck(num) {
+export function luhnCheck(num) {
   const digits = (num || "").replace(/[^0-9]/g, "");
   let sum = 0;
   let alt = false;
@@ -19,25 +19,25 @@ function luhnCheck(num) {
   return digits.length >= 13 && sum % 10 === 0;
 }
 
-function maskPhone(m) {
+export function maskPhone(m) {
   const s = m.replace(/\D/g, "");
   if (s.length < 10) return "**********";
   return s.slice(0, 2) + "*****" + s.slice(-2);
 }
 
-function maskUPI(m) {
+export function maskUPI(m) {
   const [id, handle] = m.split("@");
   const head = id?.slice(0, 2) || "**";
   return `${head}****@${handle}`;
 }
 
-function maskCard(m) {
+export function maskCard(m) {
   if (!luhnCheck(m)) return m;
   const last4 = m.replace(/\D/g, "").slice(-4);
   return `**** **** **** ${last4}`;
 }
 
-function maskEmail(m) {
+export function maskEmail(m) {
   const [user, domain] = m.split("@");
   const head = user?.slice(0, 1) || "*";
   return `${head}*****@${domain}`;
@@ -51,8 +51,9 @@ export function redactPII(text = "") {
     .replace(emailRegex, (m) => maskEmail(m));
 }
 
-const rateBuckets = new Map();
-function rateLimit(key, limit, windowMs) {
+export const rateBuckets = new Map();
+
+export function rateLimit(key, limit, windowMs) {
   const now = Date.now();
   const bucket = rateBuckets.get(key) || [];
   const fresh = bucket.filter((t) => now - t < windowMs);
@@ -62,7 +63,7 @@ function rateLimit(key, limit, windowMs) {
   return true;
 }
 
-const VALID_TAGS = new Set([
+export const VALID_TAGS = new Set([
   "UPI",
   "KYC",
   "Job",
@@ -72,12 +73,13 @@ const VALID_TAGS = new Set([
   "Govt",
   "OTP",
 ]);
-function sanitizeTags(tags) {
+
+export function sanitizeTags(tags) {
   if (!Array.isArray(tags)) return [];
   return [...new Set(tags.filter((t) => VALID_TAGS.has(t)).slice(0, 3))];
 }
 
-function ensureTextQuality(text) {
+export function ensureTextQuality(text) {
   const plain = text?.trim() || "";
   if (plain.length < 30)
     return { ok: false, reason: "Story must be at least 30 characters" };

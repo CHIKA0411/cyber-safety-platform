@@ -1,5 +1,3 @@
-// src/pages/SignupPage.jsx
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -42,7 +40,7 @@ const SignupPage = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/signup", {
+      const response = await fetch("http://localhost:5000/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -74,7 +72,7 @@ const SignupPage = () => {
         </p>
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-          {/* Name & Email */}
+          
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label
@@ -112,7 +110,6 @@ const SignupPage = () => {
             </div>
           </div>
 
-          {/* Phone & Gender */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label
@@ -152,13 +149,13 @@ const SignupPage = () => {
             </div>
           </div>
 
-          {/* Password Section with Password Visibility */}
+
           <div className="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl border border-gray-200 dark:border-gray-600 space-y-4">
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
               Create Your Password
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {/* Password Input */}
+              
               <div>
                 <label
                   htmlFor="password"
@@ -223,7 +220,7 @@ const SignupPage = () => {
                 </p>
               </div>
 
-              {/* Confirm Password Input */}
+              
               <div>
                 <label
                   htmlFor="confirmPassword"
@@ -249,7 +246,7 @@ const SignupPage = () => {
             )}
           </div>
 
-          {/* Demographic Dropdown */}
+
           <div>
             <label
               htmlFor="demographic"
@@ -273,7 +270,6 @@ const SignupPage = () => {
             </select>
           </div>
 
-          {/* Submit Button */}
           <div>
             <button
               type="submit"

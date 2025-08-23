@@ -1,9 +1,6 @@
-// src/App.jsx
-
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-// Import all your landing page components
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import TailoredSolutions from "./components/TailoredSolutions";
@@ -12,7 +9,6 @@ import Testimonials from "./components/Testimonials";
 import FinalCta from "./components/FinalCta";
 import Footer from "./components/Footer";
 
-// Import your pages
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import StudentPage from "./pages/StudentPage";
@@ -24,6 +20,7 @@ import CyberShieldFeed from "./components/CyberShieldFeed.jsx";
 import Anonymous from "./components/Anonymous.jsx";
 
 import CommunityReputationPage from "./components/CommunityReputation.jsx";
+import CybersecurityChatbot from "./pages/CyberSecurityChatBot.jsx";
 
 function App() {
   return (
@@ -31,7 +28,6 @@ function App() {
       <Navbar />
 
       <Routes>
-        {/* Route for the full landing page */}
         <Route
           path="/"
           element={
@@ -45,10 +41,7 @@ function App() {
           }
         />
 
-        {/* Route for the Login page */}
         <Route path="/login" element={<LoginPage />} />
-
-        {/* Route for the Signup page */}
         <Route path="/signup" element={<SignupPage />} />
 
         <Route path="/cybershield-feed" element={<CyberShieldFeed />} />
@@ -58,7 +51,7 @@ function App() {
           element={<CommunityReputationPage />}
         />
 
-        {/* Routes for demographic-based dashboards */}
+
         <Route path="/student-dashboard" element={<StudentPage />} />
         <Route path="/professional-dashboard" element={<ProfessionalPage />} />
         <Route
@@ -67,6 +60,7 @@ function App() {
         />
         <Route path="/homemaker-dashboard" element={<HomemakerPage />} />
         <Route path="/rural-user-dashboard" element={<RuralUserPage />} />
+        <Route path="/chatbot" element={<CybersecurityChatbot/>}/>
       </Routes>
 
       <Footer />

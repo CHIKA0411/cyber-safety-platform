@@ -1,5 +1,3 @@
-// src/components/HeroSection.jsx
-
 import React from "react";
 
 const HeroSection = () => {

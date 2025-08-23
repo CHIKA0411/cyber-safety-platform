@@ -78,7 +78,7 @@ const StoryCard = ({ story, onReadMore }) => {
 
   return (
     <div className="bg-white rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 overflow-hidden group">
-      {/* Header */}
+      
       <div className="p-4 pb-3">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
@@ -111,7 +111,7 @@ const StoryCard = ({ story, onReadMore }) => {
         </div>
       </div>
 
-      {/* Story Image */}
+
       <div className="relative h-48 bg-gradient-to-br from-indigo-50 to-blue-50 flex items-center justify-center">
         <div className="text-6xl opacity-80">{story.icon}</div>
         <div className="absolute top-3 left-3">
@@ -124,7 +124,7 @@ const StoryCard = ({ story, onReadMore }) => {
         </div>
       </div>
 
-      {/* Content */}
+
       <div className="p-4">
         <h2 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-indigo-600 transition-colors">
           {story.title}
@@ -134,7 +134,7 @@ const StoryCard = ({ story, onReadMore }) => {
           {story.summary}
         </p>
 
-        {/* Key Points */}
+
         <div className="space-y-2 mb-4">
           {story.keyPoints.slice(0, 2).map((point, index) => (
             <div key={index} className="flex items-start gap-2">
@@ -144,7 +144,7 @@ const StoryCard = ({ story, onReadMore }) => {
           ))}
         </div>
 
-        {/* Footer */}
+
         <div className="flex items-center justify-between pt-3 border-t border-gray-100">
           <div className="flex items-center gap-4 text-xs text-gray-500">
             <span className="flex items-center gap-1">👀 {story.views}</span>
