@@ -1,8 +1,6 @@
 # 🛡️ CyberShield – Your Shield Against Cyber Fraud
 
 [![Status](https://img.shields.io/badge/status-live-brightgreen.svg)](https://cyber-safety-platform-hibx.vercel.app/)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](#license)
-[![Made With](https://img.shields.io/badge/Made%20with-💙%20by%20Abha%20Mahato-blue)](https://abhamahato.in)
 
 > **An innovative cyber safety platform designed to protect every Indian — from students to seniors — against online threats, frauds, and scams.**
 
