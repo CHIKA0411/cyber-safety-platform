@@ -1,20 +1,26 @@
-# Use an official Python runtime as a parent image.
+# Use a lightweight official Python image as the base
 FROM python:3.10-slim
 
-# Set the working directory inside the container.
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy the requirements file into the container and install dependencies.
-# Using --no-cache-dir reduces the size of the final image.
-COPY requirements.txt .
+# Copy the requirements file into the container at /app
+COPY requirements.txt ./
+
+# Install the dependencies from the requirements.txt file
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy all the files from your local project into the container's working directory.
+# Copy the rest of the application code into the container
+# This copies your main.py and your model files
 COPY . .
 
-# Expose the port that the application will run on. This is crucial for web access.
+# Expose the port that the API will run on
 EXPOSE 8000
 
-# The command to run the application when the container starts.
-# We bind the host to 0.0.0.0 to make it accessible from outside the container.
+# Command to run the application using Uvicorn
+# The command format is `uvicorn <module_name>:<variable_name>`
+# This line assumes your main application file is named `main.py`
+# and the FastAPI application instance is named `app`.
+# If your file is named something else (e.g., `api.py`), change `main:app` to `api:app`.
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+

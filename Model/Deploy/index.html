@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dual Model API Client</title>
+    <!-- Use Tailwind CSS for a modern, responsive design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for a cleaner UI */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .container {
+            max-width: 700px;
+        }
+        .button-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .card-shadow {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .loader {
+            border-top-color: #3b82f6;
+            -webkit-animation: spinner 1.5s linear infinite;
+            animation: spinner 1.5s linear infinite;
+        }
+        @-webkit-keyframes spinner {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+        @keyframes spinner {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="container mx-auto p-4 md:p-8">
+        <div class="bg-white rounded-xl p-6 md:p-8 card-shadow">
+            <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Dual Model API Client</h1>
+
+            <!-- Input and Buttons Section -->
+            <div class="mb-6">
+                <label for="inputText" class="block text-gray-700 font-medium mb-2">Enter your text:</label>
+                <textarea id="inputText" class="w-full h-32 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200" placeholder="Enter text to analyze..."></textarea>
+            </div>
+
+            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-6">
+                <button id="scamButton" class="w-full sm:w-1/2 bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-200 button-shadow">Check for Scam</button>
+                <button id="contactButton" class="w-full sm:w-1/2 bg-purple-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-purple-700 transition duration-200 button-shadow">Check for Contact Number</button>
+            </div>
+
+            <!-- Results Section -->
+            <div id="loadingIndicator" class="hidden text-center text-gray-500 mb-4">
+                <div class="flex justify-center items-center">
+                    <div class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-8 w-8 mr-3"></div>
+                    Processing...
+                </div>
+            </div>
+
+            <div id="resultContainer" class="hidden bg-gray-50 rounded-lg p-4 transition-all duration-300">
+                <p class="font-semibold text-gray-700">Prediction Result:</p>
+                <div id="resultOutput" class="mt-2 text-xl font-bold"></div>
+                <div id="inputEcho" class="mt-2 text-sm text-gray-500 break-words"></div>
+            </div>
+
+            <!-- Error Message Box -->
+            <div id="errorContainer" class="hidden mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative">
+                <span id="errorMessage" class="block sm:inline"></span>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const scamButton = document.getElementById('scamButton');
+            const contactButton = document.getElementById('contactButton');
+            const inputText = document.getElementById('inputText');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const resultContainer = document.getElementById('resultContainer');
+            const resultOutput = document.getElementById('resultOutput');
+            const inputEcho = document.getElementById('inputEcho');
+            const errorContainer = document.getElementById('errorContainer');
+            const errorMessage = document.getElementById('errorMessage');
+
+            // Set the API URL. It will be the same as your docker container
+            const API_BASE_URL = 'http://localhost:8000';
+
+            const showLoading = () => {
+                loadingIndicator.classList.remove('hidden');
+                resultContainer.classList.add('hidden');
+                errorContainer.classList.add('hidden');
+            };
+
+            const hideLoading = () => {
+                loadingIndicator.classList.add('hidden');
+            };
+
+            const showError = (message) => {
+                hideLoading();
+                errorContainer.classList.remove('hidden');
+                errorMessage.textContent = message;
+            };
+
+            const showResult = (result, input) => {
+                hideLoading();
+                resultContainer.classList.remove('hidden');
+                resultOutput.textContent = result;
+                inputEcho.textContent = `Input Text: "${input}"`;
+                
+                // Color the result based on prediction
+                if (result.includes('scam') || result.includes('unsafe')) {
+                    resultOutput.classList.remove('text-green-600');
+                    resultOutput.classList.add('text-red-600');
+                } else {
+                    resultOutput.classList.remove('text-red-600');
+                    resultOutput.classList.add('text-green-600');
+                }
+            };
+
+            const handlePrediction = async (endpoint, buttonId) => {
+                const text = inputText.value.trim();
+                if (text === '') {
+                    showError('Please enter some text to analyze.');
+                    return;
+                }
+
+                showLoading();
+
+                try {
+                    const response = await fetch(`${API_BASE_URL}/${endpoint}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ text: text }),
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.detail || 'An unknown error occurred.');
+                    }
+
+                    const data = await response.json();
+                    showResult(data.prediction, data.input_text);
+
+                } catch (error) {
+                    // Check for network errors like "Failed to fetch"
+                    if (error.message.includes('Failed to fetch')) {
+                        showError('Could not connect to the API. Make sure your Docker container is running.');
+                    } else {
+                        showError(`API Error: ${error.message}`);
+                    }
+                }
+            };
+
+            scamButton.addEventListener('click', () => handlePrediction('predict-scam'));
+            contactButton.addEventListener('click', () => handlePrediction('predict-contact-number'));
+        });
+    </script>
+</body>
+</html>
