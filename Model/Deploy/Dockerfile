@@ -15,12 +15,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Expose the port that the API will run on
-EXPOSE 8000
+EXPOSE 10000
 
 # Command to run the application using Uvicorn
 # The command format is `uvicorn <module_name>:<variable_name>`
 # This line assumes your main application file is named `main.py`
 # and the FastAPI application instance is named `app`.
 # If your file is named something else (e.g., `api.py`), change `main:app` to `api:app`.
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "10000"]
 
