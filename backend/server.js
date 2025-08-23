@@ -25,7 +25,8 @@ connectDB();
 app.use("/api/auth", authRoutes); 
 app.use("/api/stories", storyRoutes); 
 
-app.get("/health", (req, res) => res.json({ ok: true }));
+
+app.get("/", (req, res) => res.send({ ok: true, message: "QuickFind API" }));
 
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
