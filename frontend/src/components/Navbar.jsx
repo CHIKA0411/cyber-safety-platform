@@ -7,14 +7,24 @@ const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // State to track if the user is logged in
+  // State to track if the user is logged in and their dashboard path
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [dashboardPath, setDashboardPath] = useState("/");
 
-  // Use useEffect to check for the token when the component mounts or location changes
+  // Use useEffect to check for the token and demographic when the component mounts or location changes
   useEffect(() => {
     const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token); // !! converts a truthy/falsy value to a boolean
-  }, [location.pathname]); // Re-run this effect when the URL changes
+    const demographic = localStorage.getItem("demographic");
+
+    setIsLoggedIn(!!token);
+
+    // Set the correct dashboard path based on the user's demographic
+    if (token && demographic) {
+      setDashboardPath(`/${demographic}-dashboard`);
+    } else {
+      setDashboardPath("/");
+    }
+  }, [location.pathname]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -77,15 +87,15 @@ const Navbar = () => {
             to="/api-tool"
             className={`font-semibold transition-colors duration-200 ${textColorClass} ${hoverTextColorClass}`}
           >
-            Scan-detector
+            API-Tool
           </Link>
         </div>
 
-        {/* Conditional Login/Signup or Logout Buttons */}
-       <div className="hidden md:flex space-x-4">
+        {/* Conditional Login/Signup or Logout/Dashboard Buttons */}
+        <div className="hidden md:flex space-x-4">
           {isLoggedIn ? (
             <>
-              
+              {/* New: Dashboard button for logged-in users */}
               <Link
                 to={dashboardPath}
                 className={`font-semibold py-2 px-4 rounded-full transition-colors duration-200 ${textColorClass} ${hoverTextColorClass}`}
