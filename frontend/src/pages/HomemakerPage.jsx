@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const Card = ({ children, className = "" }) => (
   <div className={`border border-gray-200 rounded-xl ${className}`}>
@@ -6,23 +6,34 @@ const Card = ({ children, className = "" }) => (
   </div>
 );
 
-const Button = ({ children, variant = "default", size = "default", className = "", onClick, ...props }) => {
-  const baseStyles = "inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2";
-  
+const Button = ({
+  children,
+  variant = "default",
+  size = "default",
+  className = "",
+  onClick,
+  ...props
+}) => {
+  const baseStyles =
+    "inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2";
+
   const variants = {
-    default: "bg-rose-600 text-white hover:bg-rose-700 focus:ring-rose-500 shadow-md hover:shadow-lg",
-    outline: "border border-gray-300 text-gray-700 hover:bg-gray-50 focus:ring-gray-500",
-    secondary: "bg-gray-100 text-gray-900 hover:bg-gray-200 focus:ring-gray-500"
+    default:
+      "bg-rose-600 text-white hover:bg-rose-700 focus:ring-rose-500 shadow-md hover:shadow-lg",
+    outline:
+      "border border-gray-300 text-gray-700 hover:bg-gray-50 focus:ring-gray-500",
+    secondary:
+      "bg-gray-100 text-gray-900 hover:bg-gray-200 focus:ring-gray-500",
   };
-  
+
   const sizes = {
     sm: "px-3 py-1.5 text-sm",
     default: "px-4 py-2 text-sm",
-    lg: "px-6 py-3 text-base"
+    lg: "px-6 py-3 text-base",
   };
 
   return (
-    <button 
+    <button
       className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
       onClick={onClick}
       {...props}
@@ -36,11 +47,13 @@ const Badge = ({ children, variant = "default", className = "" }) => {
   const variantStyles = {
     destructive: "bg-red-100 text-red-800 border-red-200",
     default: "bg-rose-100 text-rose-800 border-rose-200",
-    secondary: "bg-gray-100 text-gray-800 border-gray-200"
+    secondary: "bg-gray-100 text-gray-800 border-gray-200",
   };
 
   return (
-    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${variantStyles[variant]} ${className}`}>
+    <span
+      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${variantStyles[variant]} ${className}`}
+    >
       {children}
     </span>
   );
@@ -48,10 +61,10 @@ const Badge = ({ children, variant = "default", className = "" }) => {
 
 const Tabs = ({ children, defaultValue, className = "" }) => {
   const [activeTab, setActiveTab] = useState(defaultValue);
-  
+
   return (
     <div className={`${className}`}>
-      {React.Children.map(children, child => 
+      {React.Children.map(children, (child) =>
         React.cloneElement(child, { activeTab, setActiveTab })
       )}
     </div>
@@ -59,19 +72,27 @@ const Tabs = ({ children, defaultValue, className = "" }) => {
 };
 
 const TabsList = ({ children, className = "", activeTab, setActiveTab }) => (
-  <div className={`inline-flex h-10 items-center justify-center rounded-lg bg-gray-100 p-1 ${className}`}>
-    {React.Children.map(children, child => 
+  <div
+    className={`inline-flex h-10 items-center justify-center rounded-lg bg-gray-100 p-1 ${className}`}
+  >
+    {React.Children.map(children, (child) =>
       React.cloneElement(child, { activeTab, setActiveTab })
     )}
   </div>
 );
 
-const TabsTrigger = ({ children, value, className = "", activeTab, setActiveTab }) => (
+const TabsTrigger = ({
+  children,
+  value,
+  className = "",
+  activeTab,
+  setActiveTab,
+}) => (
   <button
     className={`inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-      activeTab === value 
-        ? 'bg-white text-gray-900 shadow-sm' 
-        : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900'
+      activeTab === value
+        ? "bg-white text-gray-900 shadow-sm"
+        : "text-gray-500 hover:bg-gray-50 hover:text-gray-900"
     } ${className}`}
     onClick={() => setActiveTab(value)}
   >
@@ -87,15 +108,15 @@ const TabsContent = ({ children, value, className = "", activeTab }) => {
 const ThreatCard = ({ title, description, examples, type, severity }) => {
   const iconMap = {
     shopping: "🛒",
-    banking: "🏦", 
+    banking: "🏦",
     bills: "💡",
-    community: "👥"
+    community: "👥",
   };
 
   const severityColors = {
     high: "destructive",
-    medium: "default", 
-    low: "secondary"
+    medium: "default",
+    low: "secondary",
   };
 
   const icon = iconMap[type];
@@ -108,16 +129,20 @@ const ThreatCard = ({ title, description, examples, type, severity }) => {
             {icon}
           </div>
           <div>
-            <h3 className="font-bold text-lg text-gray-900 leading-tight">{title}</h3>
+            <h3 className="font-bold text-lg text-gray-900 leading-tight">
+              {title}
+            </h3>
             <Badge variant={severityColors[severity]} className="mt-2">
               {severity.charAt(0).toUpperCase() + severity.slice(1)} Risk
             </Badge>
           </div>
         </div>
       </div>
-      
-      <p className="text-gray-600 mb-5 text-sm leading-relaxed">{description}</p>
-      
+
+      <p className="text-gray-600 mb-5 text-sm leading-relaxed">
+        {description}
+      </p>
+
       <div className="space-y-3">
         <h4 className="font-semibold text-sm text-gray-900 flex items-center gap-2">
           <span className="w-1 h-4 bg-gradient-to-b from-rose-500 to-pink-500 rounded-full"></span>
@@ -125,9 +150,16 @@ const ThreatCard = ({ title, description, examples, type, severity }) => {
         </h4>
         <ul className="space-y-2.5 ml-3">
           {examples.map((example, index) => (
-            <li key={index} className="text-sm text-gray-700 flex items-start gap-3 group">
-              <span className="text-red-500 text-xs mt-1.5 font-bold group-hover:text-red-600 transition-colors">•</span>
-              <span className="leading-relaxed group-hover:text-gray-900 transition-colors">{example}</span>
+            <li
+              key={index}
+              className="text-sm text-gray-700 flex items-start gap-3 group"
+            >
+              <span className="text-red-500 text-xs mt-1.5 font-bold group-hover:text-red-600 transition-colors">
+                •
+              </span>
+              <span className="leading-relaxed group-hover:text-gray-900 transition-colors">
+                {example}
+              </span>
             </li>
           ))}
         </ul>
@@ -141,40 +173,42 @@ const SafetyTips = () => {
     {
       id: 1,
       tip: "Check seller ratings & reviews before buying online",
-      category: "Online Shopping"
+      category: "Online Shopping",
     },
     {
       id: 2,
       tip: "Banks never ask for OTP or PIN via SMS/call",
-      category: "Banking Safety"
+      category: "Banking Safety",
     },
     {
       id: 3,
       tip: "Verify bills through official websites or apps",
-      category: "Bill Payments"
+      category: "Bill Payments",
     },
     {
       id: 4,
       tip: "Don't share UPI PIN or bank details with anyone",
-      category: "Digital Payments"
+      category: "Digital Payments",
     },
     {
       id: 5,
       tip: "Use secure payment methods (COD/trusted gateways)",
-      category: "Payment Security"
+      category: "Payment Security",
     },
     {
       id: 6,
       tip: "Be cautious of 'too good to be true' deals",
-      category: "Deal Verification"
-    }
+      category: "Deal Verification",
+    },
   ];
 
   return (
     <div className="p-6 bg-white shadow-lg rounded-xl border border-gray-200/60">
       <div className="flex items-center gap-2 mb-4">
         <span className="text-2xl">💡</span>
-        <h3 className="font-semibold text-lg text-gray-900">Smart Shopping Tips</h3>
+        <h3 className="font-semibold text-lg text-gray-900">
+          Smart Shopping Tips
+        </h3>
       </div>
 
       <div className="grid gap-3">
@@ -185,7 +219,9 @@ const SafetyTips = () => {
           >
             <span className="text-green-500 text-lg mt-0.5 font-bold">✓</span>
             <div className="flex-1">
-              <p className="text-sm font-medium mb-1 text-gray-800">{tip.tip}</p>
+              <p className="text-sm font-medium mb-1 text-gray-800">
+                {tip.tip}
+              </p>
               <span className="inline-block px-2 py-0.5 rounded-full text-xs bg-rose-100 text-rose-700 font-medium">
                 {tip.category}
               </span>
@@ -208,41 +244,62 @@ const SafeShoppingGame = () => {
       id: 1,
       question: "Which online deal looks suspicious?",
       options: [
-        { text: "iPhone 14 - ₹15,000 (90% off) - Limited time offer!", correct: true },
+        {
+          text: "iPhone 14 - ₹15,000 (90% off) - Limited time offer!",
+          correct: true,
+        },
         { text: "Kurta set - ₹800 (40% off) - Free delivery", correct: false },
-        { text: "Kitchen utensils - ₹500 (20% off) - COD available", correct: false }
+        {
+          text: "Kitchen utensils - ₹500 (20% off) - COD available",
+          correct: false,
+        },
       ],
-      explanation: "Extremely high discounts (90% off) on expensive items like iPhones are usually scams. Real discounts are typically 10-40%."
+      explanation:
+        "Extremely high discounts (90% off) on expensive items like iPhones are usually scams. Real discounts are typically 10-40%.",
     },
     {
       id: 2,
       question: "Which SMS about KYC update is genuine?",
       options: [
-        { text: "Visit your nearest branch to update KYC documents", correct: true },
-        { text: "Click here immediately to update KYC or account will be blocked", correct: false },
-        { text: "Reply with Aadhaar & PAN numbers to complete KYC", correct: false }
+        {
+          text: "Visit your nearest branch to update KYC documents",
+          correct: true,
+        },
+        {
+          text: "Click here immediately to update KYC or account will be blocked",
+          correct: false,
+        },
+        {
+          text: "Reply with Aadhaar & PAN numbers to complete KYC",
+          correct: false,
+        },
       ],
-      explanation: "Banks ask you to visit branches for KYC updates. They never ask for immediate action via links or personal details via SMS."
+      explanation:
+        "Banks ask you to visit branches for KYC updates. They never ask for immediate action via links or personal details via SMS.",
     },
     {
       id: 3,
       question: "How should you verify an electricity bill payment request?",
       options: [
         { text: "Click the link in SMS and pay immediately", correct: false },
-        { text: "Check the official electricity board app/website", correct: true },
-        { text: "Call the phone number mentioned in the SMS", correct: false }
+        {
+          text: "Check the official electricity board app/website",
+          correct: true,
+        },
+        { text: "Call the phone number mentioned in the SMS", correct: false },
       ],
-      explanation: "Always verify bills through official apps or websites. Scammers send fake urgent payment requests to create panic."
-    }
+      explanation:
+        "Always verify bills through official apps or websites. Scammers send fake urgent payment requests to create panic.",
+    },
   ];
 
   const handleAnswer = (optionIndex) => {
     setSelectedAnswer(optionIndex);
     const isCorrect = questions[currentQuestion].options[optionIndex].correct;
-    
+
     setTimeout(() => {
       if (isCorrect) setScore(score + 1);
-      
+
       if (currentQuestion < questions.length - 1) {
         setCurrentQuestion(currentQuestion + 1);
         setSelectedAnswer(null);
@@ -263,10 +320,14 @@ const SafeShoppingGame = () => {
     return (
       <Card className="p-8 text-center bg-gradient-to-br from-rose-50 to-pink-50 shadow-xl border border-rose-100">
         <div className="text-6xl mb-4">
-          {score >= 2 ? '🎉' : score === 1 ? '🙂' : '😅'}
+          {score >= 2 ? "🎉" : score === 1 ? "🙂" : "😅"}
         </div>
         <h3 className="text-2xl font-bold mb-2 text-gray-900">
-          {score >= 2 ? 'Excellent!' : score === 1 ? 'Good Job!' : 'Keep Learning!'}
+          {score >= 2
+            ? "Excellent!"
+            : score === 1
+            ? "Good Job!"
+            : "Keep Learning!"}
         </h3>
         <p className="text-lg text-gray-600 mb-6">
           You got {score} out of {questions.length} questions correct!
@@ -274,14 +335,21 @@ const SafeShoppingGame = () => {
         <div className="space-y-2 mb-6">
           <div className="flex justify-between items-center p-3 bg-white rounded-lg shadow-sm">
             <span className="font-medium text-black">Your Score:</span>
-            <span className="text-rose-600 font-bold text-lg">{score}/{questions.length}</span>
+            <span className="text-rose-600 font-bold text-lg">
+              {score}/{questions.length}
+            </span>
           </div>
           <div className="flex justify-between items-center p-3 bg-white rounded-lg shadow-sm">
             <span className="font-medium text-black">Success Rate:</span>
-            <span className="text-green-600 font-bold text-lg">{Math.round((score/questions.length) * 100)}%</span>
+            <span className="text-green-600 font-bold text-lg">
+              {Math.round((score / questions.length) * 100)}%
+            </span>
           </div>
         </div>
-        <Button onClick={resetGame} className="bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700">
+        <Button
+          onClick={resetGame}
+          className="bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700"
+        >
           🎯 Try Again
         </Button>
       </Card>
@@ -289,7 +357,7 @@ const SafeShoppingGame = () => {
   }
 
   const question = questions[currentQuestion];
-  
+
   return (
     <Card className="p-8 bg-gradient-to-br from-white to-rose-50/30 shadow-xl border border-rose-100">
       <div className="flex justify-between items-center mb-6">
@@ -304,14 +372,18 @@ const SafeShoppingGame = () => {
         </div>
       </div>
 
-      <h3 className="text-xl font-bold mb-6 text-gray-900">{question.question}</h3>
+      <h3 className="text-xl font-bold mb-6 text-gray-900">
+        {question.question}
+      </h3>
 
       <div className="space-y-3 mb-6">
         {question.options.map((option, index) => {
-          let buttonClass = "w-full p-4 text-left rounded-lg border-2 transition-all duration-200 ";
-          
+          let buttonClass =
+            "w-full p-4 text-left rounded-lg border-2 transition-all duration-200 ";
+
           if (selectedAnswer === null) {
-            buttonClass += "border-gray-200 hover:border-rose-300 hover:bg-rose-50 bg-white text-black";
+            buttonClass +=
+              "border-gray-200 hover:border-rose-300 hover:bg-rose-50 bg-white text-black";
           } else if (selectedAnswer === index) {
             if (option.correct) {
               buttonClass += "border-green-500 bg-green-50 text-green-800";
@@ -361,9 +433,11 @@ const SafeShoppingGame = () => {
       )}
 
       <div className="mt-6 bg-gray-200 rounded-full h-2">
-        <div 
+        <div
           className="bg-gradient-to-r from-rose-600 to-pink-600 h-2 rounded-full transition-all duration-300"
-          style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+          style={{
+            width: `${((currentQuestion + 1) / questions.length) * 100}%`,
+          }}
         ></div>
       </div>
     </Card>
@@ -372,7 +446,7 @@ const SafeShoppingGame = () => {
 
 const VideoTutorial = () => {
   const [currentVideo, setCurrentVideo] = useState(0);
-  
+
   const tutorials = [
     {
       id: 1,
@@ -380,7 +454,7 @@ const VideoTutorial = () => {
       duration: "3:45",
       description: "Learn to identify genuine vs fake shopping offers",
       thumbnail: "🛒",
-      topic: "Shopping Safety"
+      topic: "Shopping Safety",
     },
     {
       id: 2,
@@ -388,7 +462,7 @@ const VideoTutorial = () => {
       duration: "2:30",
       description: "Understand how to handle KYC update requests safely",
       thumbnail: "🏦",
-      topic: "Banking Security"
+      topic: "Banking Security",
     },
     {
       id: 3,
@@ -396,8 +470,8 @@ const VideoTutorial = () => {
       duration: "4:15",
       description: "Step-by-step guide to verify and pay bills securely",
       thumbnail: "💡",
-      topic: "Bill Payments"
-    }
+      topic: "Bill Payments",
+    },
   ];
 
   return (
@@ -405,20 +479,30 @@ const VideoTutorial = () => {
       <Card className="p-8 bg-gradient-to-br from-rose-50 to-pink-50 shadow-lg border border-rose-100">
         <div className="text-center mb-6">
           <div className="text-6xl mb-4">📹</div>
-          <h3 className="text-2xl font-bold text-gray-900 mb-2">Video Tutorial: {tutorials[currentVideo].title}</h3>
-          <Badge variant="default" className="mb-4">{tutorials[currentVideo].topic}</Badge>
-          <p className="text-gray-600 mb-4">{tutorials[currentVideo].description}</p>
+          <h3 className="text-2xl font-bold text-gray-900 mb-2">
+            Video Tutorial: {tutorials[currentVideo].title}
+          </h3>
+          <Badge variant="default" className="mb-4">
+            {tutorials[currentVideo].topic}
+          </Badge>
+          <p className="text-gray-600 mb-4">
+            {tutorials[currentVideo].description}
+          </p>
           <div className="flex justify-center items-center gap-2 text-sm text-gray-500">
             <span>⏱️ {tutorials[currentVideo].duration}</span>
             <span>•</span>
             <span>👁️ Hindi/English</span>
           </div>
         </div>
-        
+
         <div className="bg-white rounded-lg p-6 shadow-inner border-2 border-dashed border-rose-200">
           <div className="text-center">
-            <div className="text-4xl mb-3">{tutorials[currentVideo].thumbnail}</div>
-            <p className="text-gray-600 mb-4">Video player would be embedded here</p>
+            <div className="text-4xl mb-3">
+              {tutorials[currentVideo].thumbnail}
+            </div>
+            <p className="text-gray-600 mb-4">
+              Video player would be embedded here
+            </p>
             <Button className="bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700">
               ▶️ Play Tutorial
             </Button>
@@ -428,20 +512,28 @@ const VideoTutorial = () => {
 
       <div className="grid md:grid-cols-3 gap-4">
         {tutorials.map((tutorial, index) => (
-          <Card 
+          <Card
             key={tutorial.id}
             className={`p-4 cursor-pointer transition-all duration-200 hover:shadow-lg ${
-              currentVideo === index ? 'bg-rose-50 border-rose-200' : 'hover:bg-gray-50'
+              currentVideo === index
+                ? "bg-rose-50 border-rose-200"
+                : "hover:bg-gray-50"
             }`}
             onClick={() => setCurrentVideo(index)}
           >
             <div className="flex items-center gap-3">
               <div className="text-2xl">{tutorial.thumbnail}</div>
               <div className="flex-1">
-                <h4 className="font-medium text-sm text-gray-900 mb-1">{tutorial.title}</h4>
+                <h4 className="font-medium text-sm text-gray-900 mb-1">
+                  {tutorial.title}
+                </h4>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs text-gray-500">⏱️ {tutorial.duration}</span>
-                  <Badge variant="secondary" className="text-xs">{tutorial.topic}</Badge>
+                  <span className="text-xs text-gray-500">
+                    ⏱️ {tutorial.duration}
+                  </span>
+                  <Badge variant="secondary" className="text-xs">
+                    {tutorial.topic}
+                  </Badge>
                 </div>
               </div>
             </div>
@@ -459,7 +551,10 @@ const HomemakerPage = () => {
         <div className="container mx-auto px-4 py-16 max-w-7xl">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-              <Badge variant="secondary" className="w-fit bg-white/10 text-white border-white/20">
+              <Badge
+                variant="secondary"
+                className="w-fit bg-white/10 text-white border-white/20"
+              >
                 🏡 For Smart Homemakers
               </Badge>
               <h1 className="text-4xl lg:text-5xl font-bold text-white leading-tight">
@@ -467,21 +562,31 @@ const HomemakerPage = () => {
                 <span className="text-yellow-300">CyberShield</span>
               </h1>
               <p className="text-lg text-white/90 leading-relaxed">
-                Protecting your family's finances with easy-to-understand cybersecurity guidance. 
-                Learn to spot scams, shop safely online, and keep your digital payments secure.
+                Protecting your family's finances with easy-to-understand
+                cybersecurity guidance. Learn to spot scams, shop safely online,
+                and keep your digital payments secure.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className=" text-rose-600 hover:bg-gray-100 shadow-xl">
+                <Button
+                  size="lg"
+                  className=" text-rose-600 hover:bg-gray-100 shadow-xl"
+                >
                   🎥 Watch Tutorials
                 </Button>
-                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/10 border-2">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="border-white text-white hover:bg-white/10 border-2"
+                >
                   👥 Join Community
                 </Button>
               </div>
               <div className="flex items-center gap-6 pt-4">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-white">25K+</div>
-                  <div className="text-sm text-white/80">Families Protected</div>
+                  <div className="text-sm text-white/80">
+                    Families Protected
+                  </div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-white">₹50L+</div>
@@ -512,9 +617,12 @@ const HomemakerPage = () => {
       <section className="container mx-auto px-4 py-16 max-w-7xl">
         <Tabs defaultValue="tutorials" className="space-y-8">
           <div className="text-center space-y-4 mb-8">
-            <h2 className="text-3xl font-bold text-gray-900">Choose Your Learning Method</h2>
+            <h2 className="text-3xl font-bold text-gray-900">
+              Choose Your Learning Method
+            </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Easy-to-follow tutorials and practical tips designed for busy homemakers. Learn at your own pace!
+              Easy-to-follow tutorials and practical tips designed for busy
+              homemakers. Learn at your own pace!
             </p>
           </div>
 
@@ -560,7 +668,7 @@ const HomemakerPage = () => {
                   examples={[
                     "90% off iPhone deals from unknown websites",
                     "Fake 'Mega Sale' offers via WhatsApp forwards",
-                    "Clone websites of popular shopping apps"
+                    "Clone websites of popular shopping apps",
                   ]}
                   type="shopping"
                   severity="high"
@@ -571,7 +679,7 @@ const HomemakerPage = () => {
                   examples={[
                     "SMS: 'Update KYC in 24 hours or account blocked'",
                     "Calls asking for Aadhaar and PAN details over phone",
-                    "Fake bank emails with suspicious links"
+                    "Fake bank emails with suspicious links",
                   ]}
                   type="banking"
                   severity="high"
@@ -582,7 +690,7 @@ const HomemakerPage = () => {
                   examples={[
                     "SMS: 'Electricity will be cut in 2 hours, pay now'",
                     "Fake gas subsidy update messages",
-                    "Duplicate payment links for popular services"
+                    "Duplicate payment links for popular services",
                   ]}
                   type="bills"
                   severity="medium"
