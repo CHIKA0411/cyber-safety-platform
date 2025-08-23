@@ -78,7 +78,7 @@ const Icons = {
   Close: () => "✕",
 };
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+const API_BASE = "https://cyber-safety-platform.vercel.app/api";
 const VALID_TAGS = [
   "UPI",
   "KYC",
