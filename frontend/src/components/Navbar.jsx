@@ -1,97 +1,115 @@
+// src/components/Navbar.jsx
 
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-
   const location = useLocation();
+  const navigate = useNavigate();
 
-  const isLoginPage = location.pathname === "/login";
-  const isSignupPage = location.pathname === "/signup";
-  const bgColorClass = isLoginPage || isSignupPage ? "bg-gray-900" : "bg-white";
-  const textColorClass =
-    isLoginPage || isSignupPage ? "text-white" : "text-gray-600";
-  const logoColorClass =
-    isLoginPage || isSignupPage ? "text-indigo-400" : "text-indigo-600";
-  const hoverTextColorClass =
-    isLoginPage || isSignupPage
-      ? "hover:text-indigo-400"
-      : "hover:text-indigo-600";
-  const loginBtnColor =
-    isLoginPage || isSignupPage ? "text-gray-300" : "text-gray-600";
-  const loginBtnHover =
-    isLoginPage || isSignupPage ? "hover:text-white" : "hover:text-indigo-600";
-  const signupBtnColor =
-    isLoginPage || isSignupPage
-      ? "bg-indigo-500 hover:bg-indigo-600"
-      : "bg-indigo-600 hover:bg-indigo-700";
+  // State to track if the user is logged in
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Use useEffect to check for the token when the component mounts or location changes
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token); // !! converts a truthy/falsy value to a boolean
+  }, [location.pathname]); // Re-run this effect when the URL changes
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("demographic");
+    setIsLoggedIn(false);
+    navigate("/");
+  };
+
+  // Conditional styling based on current path (login/signup)
+  const isAuthPage =
+    location.pathname === "/login" || location.pathname === "/signup";
+  const bgColorClass = isAuthPage ? "bg-gray-900" : "bg-white";
+  const textColorClass = isAuthPage ? "text-white" : "text-gray-600";
+  const logoColorClass = isAuthPage ? "text-indigo-400" : "text-indigo-600";
+  const hoverTextColorClass = isAuthPage
+    ? "hover:text-indigo-400"
+    : "hover:text-indigo-600";
+  const signupBtnColor = isAuthPage
+    ? "bg-indigo-500 hover:bg-indigo-600"
+    : "bg-indigo-600 hover:bg-indigo-700";
+  const logoutBtnColor = "bg-red-500 hover:bg-red-600";
 
   return (
     <nav
       className={`${bgColorClass} shadow-sm sticky top-0 z-50 transition-colors duration-300`}
     >
       <div className="container mx-auto px-4 md:px-8 py-4 flex justify-between items-center">
-        
+        {/* Logo or Brand Name */}
         <Link to="/" className={`text-2xl font-bold ${logoColorClass}`}>
           CyberShield
         </Link>
 
+        {/* Navigation Links */}
         <div className="hidden md:flex space-x-8">
-          <a
-            href="/#testimonials"
-            className={`font-semibold transition-colors duration-200 ${textColorClass} ${hoverTextColorClass}`}
-          >
-            Testimonials
-          </a>
-
-
-          <a
-            href="/cybershield-feed"
+          <Link
+            to="/cybershield-feed"
             className={`font-semibold transition-colors duration-200 ${textColorClass} ${hoverTextColorClass}`}
           >
             CyberShield-Feed
-          </a>
-
-          <a
-            href="/anonymous"
+          </Link>
+          <Link
+            to="/anonymous"
             className={`font-semibold transition-colors duration-200 ${textColorClass} ${hoverTextColorClass}`}
           >
             Anonymous
-          </a>
-          <a
-            href="/community-reputation"
+          </Link>
+          <Link
+            to="/community-reputation"
             className={`font-semibold transition-colors duration-200 ${textColorClass} ${hoverTextColorClass}`}
           >
             Community-Reputation
-          </a>
+          </Link>
+          <Link
+            to="/chatbot"
+            className={`font-semibold transition-colors duration-200 ${textColorClass} ${hoverTextColorClass}`}
+          >
+            ChatBot
+          </Link>
+          <Link
+            to="/api-tool"
+            className={`font-semibold transition-colors duration-200 ${textColorClass} ${hoverTextColorClass}`}
+          >
+            Scan-detector
+          </Link>
         </div>
 
-        <a
-          href="/chatbot"
-          className={`font-semibold transition-colors duration-200 ${textColorClass} ${hoverTextColorClass}`}
-        >
-          ChatBot
-        </a>
-
-
+        {/* Conditional Login/Signup or Logout Buttons */}
         <div className="hidden md:flex space-x-4">
-          <Link
-            to="/login"
-            className={`font-semibold py-2 px-4 rounded-full transition-colors duration-200 ${loginBtnColor} ${loginBtnHover}`}
-          >
-            Login
-          </Link>
-          <Link
-            to="/signup"
-            className={`font-bold py-2 px-6 rounded-full transition-colors duration-300 transform hover:scale-105 text-white ${signupBtnColor}`}
-          >
-            Signup
-          </Link>
+          {isLoggedIn ? (
+            <button
+              onClick={handleLogout}
+              className={`font-bold py-2 px-6 rounded-full transition-colors duration-300 transform hover:scale-105 text-white ${logoutBtnColor}`}
+            >
+              Logout
+            </button>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className={`font-semibold py-2 px-4 rounded-full transition-colors duration-200 ${textColorClass} ${hoverTextColorClass}`}
+              >
+                Login
+              </Link>
+              <Link
+                to="/signup"
+                className={`font-bold py-2 px-6 rounded-full transition-colors duration-300 transform hover:scale-105 text-white ${signupBtnColor}`}
+              >
+                Signup
+              </Link>
+            </>
+          )}
         </div>
 
-
+        {/* Mobile Menu Button */}
         <div className="md:hidden">
-
           <button className={`${textColorClass} ${hoverTextColorClass}`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
