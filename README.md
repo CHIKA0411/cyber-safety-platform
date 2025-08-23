@@ -8,4 +8,4 @@
 
 ## Chatbot Workflow
 
-<img src="./ChatGPT%20Image%20Aug%2023,%202025,%2003_36_54%20PM.png" alt="Cybersecurity Chatbot Workflow" width="700"/>
+<img src="docs/Chatbot_work_flow.png" alt="Cybersecurity Chatbot Workflow" width="700"/>
