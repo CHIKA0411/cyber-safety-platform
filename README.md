@@ -9,4 +9,7 @@
 ## Chatbot Workflow
 
 <img width="1536" height="1024" alt="Chatbot_work_flow" src="https://github.com/user-attachments/assets/f27bf353-bf73-49af-9fb6-abfb0c0f0051" />
+
+## Machine learning model 1 - text detection  Workflow
+
 <img width="1039" height="571" alt="image" src="https://github.com/user-attachments/assets/76a2037d-0667-43fd-948b-f33c680a9e9c" />
