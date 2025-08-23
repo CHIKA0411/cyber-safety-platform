@@ -21,6 +21,8 @@ import Anonymous from "./components/Anonymous.jsx";
 
 import CommunityReputationPage from "./components/CommunityReputation.jsx";
 import CybersecurityChatbot from "./pages/CyberSecurityChatBot.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import APIToolPage from "./pages/APIToolPage.jsx";
 
 function App() {
   return (
@@ -40,27 +42,61 @@ function App() {
             </>
           }
         />
-
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
-
         <Route path="/cybershield-feed" element={<CyberShieldFeed />} />
         <Route path="/anonymous" element={<Anonymous />} />
         <Route
           path="/community-reputation"
           element={<CommunityReputationPage />}
         />
-
-
-        <Route path="/student-dashboard" element={<StudentPage />} />
-        <Route path="/professional-dashboard" element={<ProfessionalPage />} />
+        <Route
+          path="/student-dashboard"
+          element={
+            <ProtectedRoute>
+              {" "}
+              <StudentPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/professional-dashboard"
+          element={
+            <ProtectedRoute>
+              {" "}
+              <ProfessionalPage />{" "}
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/senior-citizen-dashboard"
-          element={<SeniorCitizenPage />}
+          element={
+            <ProtectedRoute>
+              {" "}
+              <SeniorCitizenPage />{" "}
+            </ProtectedRoute>
+          }
         />
-        <Route path="/homemaker-dashboard" element={<HomemakerPage />} />
-        <Route path="/rural-user-dashboard" element={<RuralUserPage />} />
-        <Route path="/chatbot" element={<CybersecurityChatbot/>}/>
+        <Route
+          path="/homemaker-dashboard"
+          element={
+            <ProtectedRoute>
+              {" "}
+              <HomemakerPage />{" "}
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/rural-user-dashboard"
+          element={
+            <ProtectedRoute>
+              {" "}
+              <RuralUserPage />{" "}
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/chatbot" element={<CybersecurityChatbot />} />
+        <Route path="/api-tool" element={<APIToolPage />} />.
       </Routes>
 
       <Footer />

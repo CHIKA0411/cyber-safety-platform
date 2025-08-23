@@ -1,4 +1,7 @@
+// src/components/FinalCta.jsx
+
 import React from "react";
+import { Link } from "react-router-dom";
 
 const FinalCta = () => {
   return (
@@ -10,9 +13,11 @@ const FinalCta = () => {
         <p className="mt-4 text-xl md:text-2xl font-light opacity-90 max-w-3xl mx-auto">
           Join thousands of Indians who are becoming cyber smart.
         </p>
-        <button className="mt-8 bg-white text-indigo-600 font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:bg-gray-200 transition-colors duration-300 transform hover:scale-105">
-          Start Your Cyber-Safe Journey
-        </button>
+        <Link to="/login">
+          <button className="mt-8 bg-white text-indigo-600 font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:bg-gray-200 transition-colors duration-300 transform hover:scale-105">
+            Start Your Cyber-Shield Journey
+          </button>
+        </Link>
       </div>
     </div>
   );
