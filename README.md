@@ -8,4 +8,4 @@
 
 ## Chatbot Workflow
 
-<img src="docs/Chatbot_work_flow.png" alt="Cybersecurity Chatbot Workflow" width="1300" height="568"/>
+<img width="1536" height="1024" alt="Chatbot_work_flow" src="https://github.com/user-attachments/assets/f27bf353-bf73-49af-9fb6-abfb0c0f0051" />
